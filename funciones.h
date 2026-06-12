@@ -18,9 +18,9 @@ typedef struct {
 } articulo_t;
 
 /* Prototipos */
-void cargar_art (articulo_t articulos[]);
-void imprimir_art (articulo_t articulos[]);
-void ordenar_art (articulo_t articulos[]);
+void cargar_art (articulo_t *articulos);
+void imprimir_art (articulo_t *articulos);
+void ordenar_art (articulo_t *articulos);
 void cambio (articulo_t *a, articulo_t *b);
 
 #endif

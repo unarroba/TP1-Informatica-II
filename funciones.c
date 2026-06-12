@@ -1,7 +1,7 @@
 #include "funciones.h"
 
 /* Carga de articulos, si ya existe la descripcion pregunta para actualizar la cantidad */
-void cargar_art(articulo_t articulos[])
+void cargar_art(articulo_t *articulos)
 {
     int  opc = 0, i, indice, sucursal;
     char descripcion[90];
@@ -39,7 +39,7 @@ void cargar_art(articulo_t articulos[])
 }
 
 /* Imprime la tabla de articulos cargados, para si encuentra una descripcion vacia */
-void imprimir_art(articulo_t articulos[])
+void imprimir_art(articulo_t *articulos)
 {
     int i = 0;
     printf("\n%-20s %-12s %-12s %-12s %-8s\n",
@@ -66,7 +66,7 @@ void cambio(articulo_t *a, articulo_t *b)
 }
 
 /* Ordena los articulos de mayor a menor por total */
-void ordenar_art(articulo_t articulos[])
+void ordenar_art(articulo_t *articulos)
 {
     int i, pasada;
 
