@@ -11,14 +11,14 @@ void cargar_art(articulo_t *articulos)
         scanf("%s", descripcion);
 
         i = 0;
-        while (articulos[i].descripcion[0] && strcmp(descripcion, articulos[i].descripcion))
+        while ((*(articulos + i)).descripcion[0] && strcmp(descripcion, (*(articulos + i)).descripcion))
             i++;
 
         indice = i;
-        strcpy(articulos[indice].descripcion, descripcion);
+        strcpy((*(articulos + indice)).descripcion, descripcion);
 
-        if (articulos[indice].total > 0)
-            printf("Articulo ya registrado: %s\n", articulos[indice].descripcion);
+        if ((*(articulos + indice)).total > 0)
+            printf("Articulo ya registrado: %s\n", (*(articulos + indice)).descripcion);
 
         do {
             printf("Para que sucursal? (1, 2, 3): ");
@@ -26,11 +26,11 @@ void cargar_art(articulo_t *articulos)
         } while (sucursal < 1 || sucursal > CANT_SUCURSALES);
 
         printf("Ingrese la cantidad del articulo para la sucursal %d: ", sucursal);
-        scanf("%d", &articulos[indice].cantidad_sucursal[sucursal - 1]);
+        scanf("%d", &(*(articulos + indice)).cantidad_sucursal[sucursal - 1]);
 
-        articulos[indice].total = 0;
+        (*(articulos + indice)).total = 0;
         for (i = 0; i < CANT_SUCURSALES; i++)
-            articulos[indice].total += articulos[indice].cantidad_sucursal[i];
+            (*(articulos + indice)).total += (*(articulos + indice)).cantidad_sucursal[i];
 
         printf("Desea ingresar otro articulo? 1-Si, 2-No: ");
         scanf("%d", &opc);
@@ -46,13 +46,13 @@ void imprimir_art(articulo_t *articulos)
            "Articulo", "Sucursal 1", "Sucursal 2", "Sucursal 3", "Total");
     printf("─────────────────────────────────────────────────────────────────\n");
 
-    while (i < CANT_ARTICULOS && articulos[i].descripcion[0]) {
+    while (i < CANT_ARTICULOS && (*(articulos + i)).descripcion[0]) {
        printf("%-20s %-12d %-12d %-12d %-8d\n",
-               articulos[i].descripcion,
-               articulos[i].cantidad_sucursal[SUCURSAL_1],
-               articulos[i].cantidad_sucursal[SUCURSAL_2],
-               articulos[i].cantidad_sucursal[SUCURSAL_3],
-               articulos[i].total);
+               (*(articulos + i)).descripcion,
+               (*(articulos + i)).cantidad_sucursal[SUCURSAL_1],
+               (*(articulos + i)).cantidad_sucursal[SUCURSAL_2],
+               (*(articulos + i)).cantidad_sucursal[SUCURSAL_3],
+               (*(articulos + i)).total);
         i++;
     }
 }
@@ -72,8 +72,8 @@ void ordenar_art(articulo_t *articulos)
 
     for (pasada = 1; pasada < CANT_ARTICULOS; pasada++) {
         for (i = 0; i < CANT_ARTICULOS - 1; i++) {
-            if (articulos[i].total < articulos[i + 1].total)
-                cambio(&articulos[i], &articulos[i + 1]);
+            if ((*(articulos + i)).total < (*(articulos + i + 1)).total)
+                cambio(&(*(articulos + i)), &(*(articulos + i + 1)));
         }
     }
 }
